@@ -1,0 +1,26 @@
+# https://taskfile.dev
+
+version: "3"
+
+dotenv: [".env"]
+
+includes:
+  os_specific:
+    taskfile: ./Taskfile_{{OS}}.yaml
+    flatten: true
+
+tasks:
+  default:
+    cmds:
+      - echo 'List tasks with "task -l"'
+    silent: true
+
+  commit_and_push:
+    internal: true
+    prompt: Do you want to continue with commit and push?
+    cmds:
+      - git add --all
+      - git commit -m "[RN] {{.VERSION}}"
+      - git tag -a "{{.VERSION}}" -m "See release notes"
+      - git push
+      - git push --tags

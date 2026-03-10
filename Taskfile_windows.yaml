@@ -1,0 +1,35 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  clean:
+    desc: "Clean build artifacts"
+    cmds:
+      - cmd /C del deepl-translate-cli.exe
+    silent: true
+
+  build:
+    desc: "Build distributable"
+    cmds:
+      - dart compile exe bin/deepl_translate_cli.dart -o deepl-translate-cli.exe
+    sources:
+      - "bin/*.dart"
+    generates:
+      - deepl-translate-cli.exe
+    silent: true
+
+  install:
+    desc: "Install in $HOME/bin"
+    deps: [build]
+    cmds:
+      - cmd /C copy deepl-translate-cli.exe '%HOMEPATH%\bin\deepl-translate-cli.exe'
+    silent: true
+
+  release:
+    desc: "Create and push version"
+    requires:
+      vars: [VERSION]
+    cmds:
+      - pwsh extra/release/release.ps1 {{.VERSION}}
+      - task: commit_and_push

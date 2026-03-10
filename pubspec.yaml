@@ -1,0 +1,16 @@
+name: deepl_translate_cli
+description: A simple command-line application that takes text from stdin and translates it using the DeepL API.
+version: 1.0.0
+# repository: https://github.com/mioriticus/deepl_translate_cli
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  config: ^0.8.4
+  deepl_dart: ^2.0.0
+  path: ^1.9.1
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
