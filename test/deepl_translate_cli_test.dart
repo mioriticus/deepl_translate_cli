@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:deepl_translate_cli/deepl_translate_cli.dart';
+import 'package:deepl_translate_cli/input.dart';
 import 'package:test/test.dart';
 
 void main() {
