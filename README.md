@@ -1,6 +1,6 @@
 # deepl_translate_cli
 
-This CLI reads UTF-8 text from `stdin`, translates it with DeepL, and works well in a pipe.
+This CLI reads UTF-8 text from `stdin`, translates it with DeepL, writes the result at `stdout`. It works well in a pipe.
 
 Configuration file:
 
@@ -20,7 +20,7 @@ echo "hello world" | dart run bin/deepl_translate_cli.dart --lang=de --api-key=Y
 
 Triggering it from a shortcut in i3:
 
-```config
+```
 # DeepL
-bindsym Shift+Control+Mod1+C exec --no-startup-id xsel -p | deepl-translate-cli | yad --width=400 --height=200 --form --title "DeepL" --field="Translation:":TXT
+bindsym $mod+C exec --no-startup-id xsel -p | deepl-translate-cli | yad --text-info --width=400 --height=200 --title="DeepL" --wrap --show-cursor --button="Close:0"
 ```
