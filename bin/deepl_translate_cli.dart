@@ -33,8 +33,11 @@ Future<void> main(List<String> arguments) async {
 
   final deepl = DeepL(authKey: apiKey);
   final inputText = await readTextFromInput(stdin);
-  final result = await deepl.translate.translateText(inputText, lang);
-  print(result.text);
+  final String translatedText = await translateTextRows(inputText, (rows) async {
+    final results = await deepl.translate.translateTextList(rows, lang);
+    return [for (final result in results) result.text];
+  });
+  print(translatedText);
 
   exit(0);
 }
